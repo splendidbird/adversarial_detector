@@ -1,0 +1,13 @@
+# download ckpts
+cd ./sample_targeted_attacks
+./download_checkpoints.sh
+
+#get images to ./dataset/images together with target_class.csv
+
+# run attack, generate adv images in ./adv_images
+cd ..
+./run_target_attacks_ctf.sh
+
+# send adv_image to defense server
+
+# retrieve defense result

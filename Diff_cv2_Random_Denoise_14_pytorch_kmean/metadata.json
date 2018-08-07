@@ -1,0 +1,6 @@
+{
+  "type": "defense",
+  "container":"xjiao/pytorch_cv2_skilearn:gpu",
+  "container_gpu": "xjiao/pytorch_cv2_skilearn:gpu",
+  "entry_point": "run_defense.sh"
+}

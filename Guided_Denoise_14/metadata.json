@@ -1,0 +1,6 @@
+{
+  "type": "defense",
+  "container":"xjiao/ch2.0_pytorch0.4_tf1.1_py2.7:cpu",
+  "container_gpu": "xjiao/ch2.0_pytorch0.4_tf1.1_py2.7:gpu",
+  "entry_point": "run_defense.sh"
+}
