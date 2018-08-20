@@ -16,3 +16,4 @@ python defense2.py \
   --input_dir="${INPUT_DIR}" \
   --output_dir="${OUTPUT_DIR}" \
   --checkpoint_path=adv_inception_v3.ckpt
+

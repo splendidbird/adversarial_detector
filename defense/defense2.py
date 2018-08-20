@@ -150,7 +150,7 @@ class FileEventHandler(FileSystemEventHandler):
                         res_file.flush()
             if os.path.exists(output_file_name):
                 os.remove(output_file_name)
-            shutil.copy(img_file, output_file_name)
+            #shutil.copy(img_file, output_file_name)
             os.remove(img_file)
 
     def on_created(self, event):
