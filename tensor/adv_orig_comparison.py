@@ -49,7 +49,6 @@ def tucker_core(imgarray, tucker_rank):
     # print(tucker_factors[2].shape)
     return core, tucker_factors
 
-
 if __name__=="__main__":
 
     target ="3_attack.png"
@@ -76,6 +75,7 @@ if __name__=="__main__":
     imgobj = Image.open(target)
     imgarray = np.array(imgobj)
     imgarray_orig = imgarray
+    core_orig_orig, tucker_factors = tucker_core(imgarray, core_rank)
 
     mid1 = np.matmul(imgarray, facC)
     print(mid1.shape)
@@ -120,34 +120,43 @@ if __name__=="__main__":
     plt.colorbar()
     plt.show()
 
-    # fig = plt.figure()
-    # ax = fig.add_subplot(1, 3, 1)
-    # plt.imshow(np.log(core_orig[:,:,0]))
-    #
-    # ax = fig.add_subplot(1, 3, 2)
-    # plt.imshow(np.log(core_orig[:,:,1]))
-    #
-    # ax = fig.add_subplot(1, 3, 3)
-    # plt.imshow(np.log(core_orig[:,:,2]))
-    #
-    # plt.show()
+    diag = []
+    diag2 = []
+    for i in range(299):
+        diag.append(core_orig_orig[i,i,0]**2)
+        diag2.append(core_orig_orig[i,i,0]**2)
+    plt.plot(np.log(diag/sum(diag)),"g-")
+    core_orig_orig_accum = [sum(diag2[:i])/sum(diag2) for i in range(1, len(diag)+1)]
 
     diag = []
+    diag2 = []
     for i in range(299):
-        diag.append(abs((core_adv[i,i,0] - core_orig[i,i,0])))
-    plt.plot(diag,"r*")
+        diag.append(abs(core_adv[i,i,0]**2))
+        diag2.append(core_adv[i,i,0]**2)
+    plt.plot(np.log(diag/sum(diag)),"r-")
+    core_adv_accum = [sum(diag2[:i])/sum(diag2) for i in range(1, len(diag)+1)]
+
+    diag = []
+    diag2 = []
+    for i in range(299):
+        diag.append(abs(core_orig[i,i,0]**2))
+        diag2.append(core_orig[i,i,0]**2)
+    plt.plot(np.log(diag/sum(diag)),"b-")
+    plt.show()
+    core_orig_accum = [sum(diag2[:i])/sum(diag2) for i in range(1, len(diag)+1)]
+
+    plt.plot(core_orig_orig_accum, "g-")
+    plt.plot(core_adv_accum,"r-")
+    plt.plot(core_orig_accum,"b-")
     plt.show()
 
     diag = []
+    diag2 = []
     for i in range(299):
-        diag.append(np.log(abs(core_adv[i,i,0])))
+        diag.append(abs((core_adv_accum[i] - core_orig_orig_accum[i])))
+        diag2.append(abs((core_adv_accum[i] - core_orig_accum[i])))
     plt.plot(diag,"r*")
-    # plt.show()
-    diag = []
-    for i in range(299):
-        diag.append(np.log(abs(core_orig[i,i,0])))
-    plt.plot(diag,"b*")
+    plt.plot(diag2,"g*")
     plt.show()
-
 
     # end of cod
