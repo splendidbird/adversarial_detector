@@ -78,8 +78,9 @@ def save_curve(imgfile, rankend, outputpath, savepath):
             classresult.append(int(f.read().split()[0]))
         os.remove(os.path.join(outputpath, fname))
 
-    savename = imgfile.split('.')[0]
+    savename = imgfile.split('.')[0]+'_svd'
     np.save(os.path.join(savepath, savename), classresult)
+
 
     # plt.plot(classresult, "b*", markersize=7)
     # plt.show()
