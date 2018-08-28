@@ -73,12 +73,13 @@ def save_curve(imgfile, rankend, outputpath, savepath):
     classresult = []
 
     for rank in range(1, rankend + 1):
-        fname = imgfile.split('.')[0]+'_svd_'+str(rank)+'.txt'
+        fname = imgfile.split('.')[0]+'_'+str(rank)+'.txt'
+        # fname = imgfile.split('.')[0]+'_svd_'+str(rank)+'.txt'
         with open(os.path.join(outputpath, fname), 'r') as f:
             classresult.append(int(f.read().split()[0]))
         os.remove(os.path.join(outputpath, fname))
 
-    savename = imgfile.split('.')[0]+'_svd'
+    savename = imgfile.split('.')[0]#+'_svd'
     np.save(os.path.join(savepath, savename), classresult)
 
 
@@ -96,8 +97,8 @@ if __name__=="__main__":
     samples = os.listdir(sample_path)
     for fname in samples:
         print("Procesing %s" % fname)
-        progressive_generation_svd(os.path.join(sample_path, fname), rankend, inputpath)
-
+        # progressive_generation_svd(os.path.join(sample_path, fname), rankend, inputpath)
+        progressive_generation(os.path.join(sample_path, fname), rankend, inputpath)
         while(len(os.listdir(outputpath)) < rankend):
             pass
         save_curve(fname, rankend, outputpath, savepath )
