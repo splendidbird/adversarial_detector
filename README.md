@@ -1,9 +1,18 @@
-# CTF Toolkit
+# Adversarial Image Attack Sensor
 
-This is modified from the toolkit for the
+A tool to evalute whether an input image has been attacked (as an adversarial example) to fool conventional classifiers. 
+A score is output from the binary classifier, based on which the input image can be categorized into 'Safe', 'Suspicious' and 'Danger'.
+
+Two deployments - stand-alone and cloud:
+
+Stand-alone version is based on a tool kit for the 
 [Competition on Adversarial Attacks and Defenses 2018](http://caad.geekpwn.org/) CTF @ LV
 
-## Installation
+The cloud version is deployed on AWS for real-time classification, with API available in the future. 
+
+## Algorithm
+
+## Installation (Stand-alone)
 
 ### Prerequisites
 
@@ -60,6 +69,12 @@ Or you can define number of images:
 ./download_images.sh <output_folder> <number of images>
 ```
 
+## Cloud Service
+
+## Docker
+
+## API
+
 ## Dataset
 
 This toolkit includes 1000 labelled images.
@@ -73,143 +88,9 @@ python ./category/category.py <label_id>
 
 ## How to use this tool kit
 ### Only defense
-```bash
-./run_defense.sh ../input ../output
-```
-starts a classifier and keeps it monitoring the input folder. If there’s a new image, the classifier will inference the result into a txt file with the same name as image, and move both files into output folder.
-
-You can also run defense in docker
-```bash
-# container and entry_point are defined in matadata.json under defense folder
-# This shell file must be in the same folder as 'input' and 'output' 
-./run_defense_docker.sh <defense_dir>
-```
-
-Or
-```bash
-#  Firstly start the container
-docker run --rm -ti -v /…/defense:/code -v /…/input:/input -v /…/output:/output -w/code tensorflow/tensorflow:1.1.0 /bin/bash
-```
-```bash
-# Go inside docker container, and run the defense
-./run_defense2.sh /input /output
-```
-
-### Simulate the CTF
-1. Start the classifier/defense
-2. Start the server by running the following script
-```bash
-# It starts a server running at 127.0.0.1:8888.
-Python defensewrapper.py
-```
-
-
-3. Run our codes to get info from and post attack to the server
-* ctf.py: a class having all functions required for this CTF
-  * getmydefense
-  * getdefenses
-  * getpng
-  * postpng
-* post-attack.py: a example of posting an adversarial image to server
 
 
 ### Commands accepted by server
-
-#### *getmydefense* 
-get your team's defense id
-```
-127.0.0.1:8888/?cmd=getmydefense&attackid=12345
-```
-
-```json
-Response sample in json forma
-{
- "msg": "getmydefense succeed",
- "classlabel": 123,
- "defenseid": 1,
- "result": 0
-}
-```
-#### *getdefenses* will get all defenses you can attack
-```
-127.0.0.1:8888/?cmd=getdefenses&attackid=12345
-```
-```json
-Response sample in json format
-{
- [
- {
- "classlabel": 260,
- "defenseid": 2
- },
- {
- "classlabel": 851,
- "defenseid": 3
- },
- {
- "classlabel": 74,
- "defenseid": 4
- },
- {
- "classlabel": 309,
- "defenseid": 5
- }
-]
-}
-```
-
-#### *getdefenses* 
-get all defenses you can attack
-```
-127.0.0.1:8888/?cmd=getdefenses&attackid=12345
-```
-```json
-Response sample in json format
-{
- [
- {
- "classlabel": 260,
- "defenseid": 2
- },
- {
- "classlabel": 851,
- "defenseid": 3
- },
- {
- "classlabel": 74,
- "defenseid": 4
- },
- {
- "classlabel": 309,
- "defenseid": 5
- }
-]
-}
-```
-#### *getteamlogo*
-This command will respond the image which the team need to use as the source
-image. Create adversarial examples based on this image to attack other teams.
-```bash
-127.0.0.1:8888/?cmd=getteamlogo&attackid=12345
-Response: binary data content of .png file.
-```
-
-#### *postattack*
-This command will be used to attack other defenses. The defenseid parameter in the
-request is the target defense. The epsilon parameter is the perturbation. The epsilon value can be 1,2,4,8,16,32
-```bash
-127.0.0.1:8888/?cmd=postattack&attackid=abcde&defenseid=2&epsilon=32
-Post data body: binary data content of adversarial example .png file.
-Response sample: json format
-{
- "msg": "attack performed",
- "classlabel": 34,
- "attackresult": "negative",
- "result": 0,
- "description": "loggerhead, loggerhead turtle, Caretta caretta\n"
-}
-```
-If attack is successful, the “attackresult”field will be positive. Otherwise, it is negative. The classlabel is the class the defense put the image in. Result is 0 if attack performed, otherwise there are problems when attacking.
 
 
 
