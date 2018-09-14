@@ -11,8 +11,9 @@ Stand-alone version is based on a tool kit for the
 The cloud version is deployed on AWS for real-time classification, with API available in the future.
 
 ## Algorithm
-![AdvDistribution]
-(https://github.com/splendidbird/adversarial_detector/raw/master/images/adv_disc_dist.png)
+![A=USigmaVt](/images/A=USigmaVt.gif)
+
+![AdvDistribution](/images/adv_disc_dist.png)
 
 ## Installation (Stand-alone)
 
