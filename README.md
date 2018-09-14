@@ -12,7 +12,7 @@ The cloud version is deployed on AWS for real-time classification, with API avai
 
 ## Algorithm
 ![AdvDistribution]
-(https://raw.githubusercontent.com/splendidbird/adversarial_detector/images/adv_disc_dist.png)
+(https://github.com/splendidbird/adversarial_detector/raw/master/images/adv_disc_dist.png)
 
 ## Installation (Stand-alone)
 
