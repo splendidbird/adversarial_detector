@@ -1,6 +1,6 @@
 # Adversarial Image Attack Sensor
 
-A tool to evalute whether an input image has been attacked (as an adversarial example) to fool conventional classifiers.
+A tool to evaluate whether an input image has been attacked (as an adversarial example) to fool conventional classifiers.
 A score is output from the binary classifier, based on which the input image can be categorized into 'Safe', 'Suspicious' and 'Danger'.
 
 Two deployments - stand-alone and cloud:
@@ -10,10 +10,22 @@ Stand-alone version is based on a tool kit for the
 
 The cloud version is deployed on AWS for real-time classification, with API available in the future.
 
-## Algorithm
-![A=USigmaVt](/images/A=USigmaVt.gif)
+## Abstract
+An RGB image can be represented by a 3-way tensor whose dimension is specified by the width, length and depth (colors) of the image. At each depth (color), the 2d matrix can also be considered as a covariance matrix between pixel rows and columns. For most unperturbed original images, information (variance) contained in the tensor is way more than enough for an even basic classifier like inception-v4 to make accurate classification. However, it is highly unlikely the case for an image with targeted perturbations, depending on how the misleading perturbation is introduced into the tensor. 
 
-![AdvDistribution](/images/adv_disc_dist.png)
+
+## Algorithm
+
+## Algorithm Fundamentals
+1. Singular value decomposition for Images Reconstruction
+![SVD_Equations](/images/SVD_Equations.gif)
+Singular Value Decomposition is applied to image matrix A (Eq.1), and first n singular values (Eq.3) are preserved to reconstruct the image matrix An (Eq.4)
+
+2. Tensor decomposition for Image Reconstruction
+The Tucker Tensor decomposition decomposes a tensor into a core tensor and multiple matrices for scaling along each mode. 
+The RGB image is treated as a 3-way tensor, and its Tucker core is another 3-way tensor with reduced scale. 
+![Tucker_Equations](/images/Tucker_Equations.gif)
+Tucker Decomposition is applied to image tensor X (Eq.5) with the rank of the core set to be (n x n x 1), which can then be truncated to reconstruct the image.
 
 ## Installation (Stand-alone)
 
