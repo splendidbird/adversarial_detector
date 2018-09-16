@@ -14,8 +14,11 @@ The cloud version is deployed on AWS for real-time classification, with API avai
 An RGB image can be represented by a 3-way tensor whose dimension is specified by the width, length and depth (colors) of the image. At each depth (color), the 2d matrix can be considered as a covariance matrix between pixel rows and columns. For most unperturbed original images, information (variance) contained in the tensor (or covariance matrice) is more than enough for a basic classifier like inception-v4 to make accurate classification, and this is however unlikely the case for an image with targeted perturbations. Investigations on the core ranks (or number of singular values at each depth) of the tensor required for a conventional classifier like inception-v4 to make final decision reveal notable difference between original image and adversarial image with targeted perturbations. Therefore, an easy-to-implement sensor to detect targeted adversarial image attack is built with a conventional classifier. 
 
 ## Preliminary Results
-
-
+![Overall_tensor](/images/hist_overall_tensor.png)
+![Overall_svd](/images/hist_overall_svd.png)
+![Overall_svd2](/images/hist_overall_svd2.png)
+![Overall_svd3](/images/hist_overall_svd3.png)
+![Overall_svd132](/images/hist_overall_svd132.png)
 
 ## Algorithm
 
