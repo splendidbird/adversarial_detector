@@ -18,14 +18,15 @@ An RGB image can be represented by a 3-way tensor whose dimension is specified b
 
 ## Algorithm Fundamentals
 1. Singular value decomposition for Images Reconstruction
-![SVD_Equations](/images/SVD_Equations.gif)
 Singular Value Decomposition is applied to image matrix A (Eq.1), and first n singular values (Eq.3) are preserved to reconstruct the image matrix An (Eq.4)
+
+![SVD_Equations](/images/SVD_Equations.gif)
 
 2. Tensor decomposition for Image Reconstruction
 The Tucker Tensor decomposition decomposes a tensor into a core tensor and multiple matrices for scaling along each mode. 
-The RGB image is treated as a 3-way tensor, and its Tucker core is another 3-way tensor with reduced scale. 
+The RGB image is treated as a 3-way tensor, and its Tucker core is another 3-way tensor with reduced scale. Tucker Decomposition is applied to image tensor X (Eq.5) with the rank of the core set to be (n x n x 1), which can then be truncated to reconstruct the image.
+
 ![Tucker_Equations](/images/Tucker_Equations.gif)
-Tucker Decomposition is applied to image tensor X (Eq.5) with the rank of the core set to be (n x n x 1), which can then be truncated to reconstruct the image.
 
 ## Installation (Stand-alone)
 
