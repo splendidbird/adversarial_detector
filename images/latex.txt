@@ -32,3 +32,6 @@ where
 A\in \mathbb{R}^{I\times P}, \
 B\in \mathbb{R}^{J\times Q}, \
 C\in \mathbb{R}^{K\times R}
+\\\\
+\hat{\delta}_k (x) = -\frac{1}{2}x^T\Sigma^{-1}_kx+x^T\Sigma^{-1}_k\hat{\mu}_k-\frac{1}{2}\hat{\mu}_k^T\Sigma^{-1}_k\hat{\mu}_k-\frac{1}{2}log\left | \Sigma_k \right |+log\left ( \hat{\pi}_k \right )
+\\\\
