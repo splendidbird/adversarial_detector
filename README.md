@@ -1,11 +1,10 @@
 # Adversarial Image Attack Sensor
 
-A tool to evaluate whether an input image has been attacked (as an adversarial example) to fool conventional classifiers.
-A score is output from the binary classifier, based on which the input image can be categorized into 'Safe', 'Suspicious' and 'Danger'.
+A tool to evaluate whether an input image has been attacked (as an adversarial example) to fool an image classifiers.
 
-Two deployments - stand-alone and cloud:
+Two deployments - stand-alone or in cloud:
 
-Stand-alone version is based on a tool kit for the
+Stand-alone version takes advantage of a watchdog tool kit implementation for the
 [Competition on Adversarial Attacks and Defenses 2018](http://caad.geekpwn.org/) CTF @ LV
 
 The cloud version is deployed on AWS for real-time classification, with API available in the future.
